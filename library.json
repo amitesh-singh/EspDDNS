@@ -1,0 +1,21 @@
+{
+    "name": "EspDDNS",
+    "keywords": "EspDDNS, ddns, duck, duckdns, dynv6",
+    "description": "IPV6 enabled DDNS client for ESP8266 and ESP32.",
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/amitesh-singh/EspDDNS"
+    },
+    "authors":
+    [
+      {
+        "name": "Amitesh Singh",
+        "email": "singh.amitesh@gmail.com",
+        "maintainer": true
+      }
+    ],
+    "version": "0.0.1",
+    "frameworks": "arduino",
+    "platforms": "espressif"
+  }

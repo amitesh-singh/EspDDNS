@@ -1,0 +1,4 @@
+ddns KEYWORD1
+client	KEYWORD2
+update	KEYWORD2
+ip_type	KEYWORD2
