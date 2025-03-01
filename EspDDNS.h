@@ -172,6 +172,24 @@ namespace ddns
         {
             cb_ = cb;
         }
+  
+        void wait()
+        {
+          for (bool configured = false; !configured;) {
+            for (auto addr : addrList)
+              if (ip_type_ == ip_type::IPv6 or ip_type_ == ip_type::IPv4_and_v6) {
+                if (configured = !addr.isLocal() && addr.isV6()) {
+                  break;
+                }
+              } else if (ip_type_ == ip_type::IPv4) {
+                if (configured = !addr.isLocal()) {
+                  break;
+              }
+            }
+            delay(100);
+          }
+        }
+
 
         bool update(bool use_local_ip = false);
         String get_ipv6();

@@ -163,6 +163,7 @@ namespace ddns
         #else
             return false;
         #endif
+
 #endif
 
 #if defined(ESP32)

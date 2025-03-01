@@ -18,18 +18,6 @@ void setup()
     Serial.begin(115200);
     WiFi.begin(ssid, passwd);
     
-    while (WiFi.status() != WL_CONNECTED)
-    {
-        delay(100);
-        Serial.print(".");
-    }
-
-    Serial.print("Connected.., local ip: ");
-    Serial.println(WiFi.localIP());
-
-    set_dnsserver_google();
-    delay(100);
-
     // In case of ipv6, do enable lwp2 option in arduino ide.
     // IPv6 is by default
     //ddns::client ddns_client(ddns::type::DUCKDNS, "yourdomain.duckdns.org", "yourduckdnstoken");
@@ -39,6 +27,15 @@ void setup()
         Serial.print("Ip address is changed to: ");
         Serial.print(new_ip);
     });
+
+    // wait for the esp8266 to get the ipv6 
+    ddns_client.wait();
+
+    Serial.print("Connected.., local ip: ");
+    Serial.println(WiFi.localIP());
+
+    set_dnsserver_google();
+    delay(100);
 
     //just check once on boot only.
     ddns_client.update();
