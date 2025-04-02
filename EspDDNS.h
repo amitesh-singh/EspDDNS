@@ -130,6 +130,12 @@ namespace ddns
         bool update(const String &domain, const String &token, ip_type ipt, bool use_local_ip) override;
     };
 
+    class dynv6: public updater
+    {
+        public:
+        bool update(const String &domain, const String &token, ip_type ipt, bool use_local_ip) override;
+    };
+
     class client
     {
         public:
@@ -157,7 +163,7 @@ namespace ddns
             }
             else if (type_ == type::DYNV6)
             {
-
+                updater_ = new dynv6();
             }
         #if defined(ESP32)
             if (ip_type_ == ip_type::IPv6)

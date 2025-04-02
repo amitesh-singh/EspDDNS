@@ -188,6 +188,46 @@ namespace ddns
         return ret;
     }
 
+    bool dynv6::update(const String &domain, const String &token, ip_type ipt, bool use_local_ip)
+    {
+        String url;
+        
+        if (ipt == ip_type::IPv6)
+        {
+#if defined(ESP8266)
+        #if LWIP_IPV6
+            getEspIPv6();
+            getDDNSIPv6(domain);
+            if (dns_success_ and esp_ipv6_ == duckdns_ipv6_) return false;
+
+            url = "http://ipv6.dynv6.com/api/update?hostname=" + domain + "&token=" + token + "&ipv6=" + esp_ipv6_.toString();
+        #else
+            return false;
+        #endif
+
+#endif
+
+#if defined(ESP32)
+            getEspIPv6();
+            getDDNSIPv6(domain);
+            if (dns_success_ and esp_ipv6_ == duckdns_ipv6_) return false;
+
+            url = "http://ipv6.dynv6.com/api/update?hostname=" + domain + "&token=" + token + "&ipv6=" + esp_ipv6_.toString();
+#endif
+        }
+        else if (ipt == ip_type::IPv4)
+        {
+            getEspIPv4(use_local_ip);
+            getDDNSIPv4(domain);
+            if (dns_success_ and esp_ipv4_ == duckdns_ipv4_) return false;
+            url = "http://ipv6.dynv6.com/api/update?hostname=" + domain + "&token=" + token + "&ipv4=" + esp_ipv4_.toString();
+        }
+
+        bool ret = connect(url);
+
+        return ret;
+    }
+
     bool client::update(bool use_local_ip)
     {
         bool ret { false };

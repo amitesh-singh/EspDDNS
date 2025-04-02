@@ -3,8 +3,8 @@
 IPV6 enabled DDNS client for ESP8266 and ESP32.
 
 ## Supported DDNS providers:
-- duckdns  -> `Fully supported`
-- dynv6    -> `In progress`
+- duckdns  -> `Fully supported` https:://duckdns.org
+- dynv6    -> `Fully supported` https://dynv6.com/
 
 This only works if IPv6 is supported by your ISP. [https://test-ipv6.com/](https://test-ipv6.com/)
 ## esp8266 example
